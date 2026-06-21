@@ -53,9 +53,9 @@ For high-stakes decisions (security findings, breaking-change assessments), use 
    - Attempt 4: Argue from test coverage evidence
    - Attempt 5: Argue from production telemetry / historical stability
 
-3. If 3 or more attempts successfully refute the finding, DROP it.
-4. If 2 attempts refute it, DOWNGRADE to low-confidence.
-5. If 0-1 attempts refute it, REPORT as high-confidence.
+3. If 3 or more attempts successfully refute the finding, DROP it (<30% confidence).
+4. If 2 attempts refute it, DOWNGRADE to Low (30-50%) or Medium (50-80%) confidence.
+5. If 0-1 attempts refute it, REPORT as High (80-95%) or Critical (95%+) confidence.
 
 This prevents a single clever rationalization from killing a valid finding while still filtering out claims that are easily disproven from multiple angles.
 
@@ -81,7 +81,7 @@ These are findings that AI reviewers frequently generate that almost always fail
 ### 3. "Theoretical race condition that can't happen"
 
 **Why it's usually wrong:**
-- Single-threaded runtime (Node.js event loop, Python GIL for CPU-bound ops)
+- Single-threaded runtime (Node.js event loop, or single-threaded execution environments)
 - Framework guarantees serialized access (database transaction, mutex already held by caller)
 - The "shared state" is actually request-scoped and never crosses goroutine/thread boundaries
 

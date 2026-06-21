@@ -61,6 +61,7 @@ Report surviving findings in this format:
 **Location:** `path/to/file.ext` L42-L48
 **Claim:** <what is wrong>
 **Impact:** <concrete harm>
+**Assumptions:** <undocumented assumptions if low-confidence, otherwise N/A>
 **Refutation attempted:** <what defense was tried and why it failed>
 **Suggested fix:** <minimal code change>
 ```
