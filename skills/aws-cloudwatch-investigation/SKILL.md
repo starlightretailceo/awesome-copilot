@@ -20,7 +20,7 @@ Find the top errors in a time window, grouped by error type:
 
 ```
 fields @timestamp, @message, @logStream
-| filter @message like /(?i)(error|exception|fatal|critical)/
+| filter @message =~ /(?i)(error|exception|fatal|critical)/
 | stats count(*) as errorCount by bin(5m), @logStream
 | sort errorCount desc
 | limit 20
@@ -64,7 +64,7 @@ Find Lambda functions or containers killed by memory pressure:
 
 ```
 fields @timestamp, @message, @logStream, @memorySize, @maxMemoryUsed
-| filter @message like /Runtime exited|out of memory|OOMKilled|Cannot allocate memory|MemoryError/
+| filter @message =~ /Runtime exited|out of memory|OOMKilled|Cannot allocate memory|MemoryError/
 | stats count(*) as oomEvents by @logStream, bin(10m)
 | sort oomEvents desc
 | limit 10
@@ -87,7 +87,7 @@ Find invocations that hit the configured timeout:
 
 ```
 fields @timestamp, @duration, @logStream, @requestId
-| filter @message like /Task timed out/ or @duration > 28000
+| filter @message like "Task timed out" or @duration > 28000
 | stats count(*) as timeouts by @logStream, bin(5m)
 | sort timeouts desc
 ```
@@ -250,7 +250,10 @@ Combine multiple throttling signals into a single pressure metric:
 MetricDataQueries:
   - Id: lambda_throttles
     MetricStat:
-      Metric: {Namespace: AWS/Lambda, MetricName: Throttles}
+      Metric:
+        Namespace: AWS/Lambda
+        MetricName: Throttles
+        Dimensions: [{Name: FunctionName, Value: TARGET}]
       Period: 60
       Stat: Sum
   - Id: api_gw_429s
@@ -278,8 +281,8 @@ MetricDataQueries:
       Period: 60
       Stat: Maximum
   - Id: headroom
-    Expression: "1000 - concurrent"
-    Label: "Remaining Concurrency (account limit 1000)"
+    Expression: "SERVICE_QUOTA(concurrent) - concurrent"
+    Label: "Remaining Concurrency"
 ```
 
 ---
