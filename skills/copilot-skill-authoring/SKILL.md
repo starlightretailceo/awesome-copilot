@@ -1,11 +1,6 @@
 ---
 name: copilot-skill-authoring
-description: >
-  Reference guide for authoring GitHub Copilot contributions in .agent.md and SKILL.md
-  formats. Covers the frontmatter contract, format selection criteria, trigger-description
-  patterns, dos and don'ts, and a mapping table from Claude/Codex concepts to Copilot
-  equivalents. Use when creating new Copilot skills or agents, reviewing contributions
-  for correctness, or migrating definitions from other AI platforms.
+description: 'Reference guide for authoring GitHub Copilot contributions in .agent.md and SKILL.md formats. Covers the frontmatter contract, format selection criteria, trigger-description patterns, dos and don''ts, and a mapping table from Claude/Codex concepts to Copilot equivalents. Use when creating new Copilot skills or agents, reviewing contributions for correctness, or migrating definitions from other AI platforms.'
 ---
 
 # Copilot Skill Authoring Guide
@@ -23,9 +18,7 @@ follows a workflow, or produces structured output.
 ```yaml
 ---
 name: kebab-case-agent-name
-description: >
-  Imperative description of what this agent does and when to invoke it.
-  Starts with a verb or "Use when...". Under 300 characters.
+description: 'Imperative description of what this agent does and when to invoke it. Starts with a verb or "Use when...". Under 150 characters.'
 ---
 ```
 
@@ -50,10 +43,7 @@ or guidelines that inform decisions but don't define a persona or workflow.
 ```yaml
 ---
 name: kebab-case-skill-name
-description: >
-  Multi-line description explaining the knowledge domain and when this
-  skill should be activated. Can be longer than agent descriptions since
-  skills need more context for accurate triggering.
+description: 'Description explaining the knowledge domain and when this skill should be activated. Can be longer than agent descriptions (up to 1024 characters) since skills need more context for accurate triggering.'
 ---
 ```
 
@@ -81,9 +71,9 @@ description: >
 ### Formatting Rules
 
 - Use `---` fences (three dashes) for YAML frontmatter boundaries
-- Multi-line descriptions use YAML block scalar (`>` for folded, `|` for literal)
+- Description field must be wrapped in single quotes (e.g., 'description text')
 - No trailing spaces in frontmatter values
-- No quotes around simple string values unless they contain special YAML characters
+- No quotes around other simple string values unless they contain special YAML characters
 
 ### What NOT to Include in Frontmatter
 
@@ -141,7 +131,7 @@ Do NOT use when:
 - Be specific about file types, languages, and tools
 - Include concrete examples of input/output in the body
 - Test that your description uniquely identifies your contribution's purpose
-- Keep the body under 2000 lines; link to external docs for exhaustive references
+- Keep the SKILL.md body under 500 lines (consider splitting into references/ at ~200 lines); link to external docs for exhaustive references
 - Use markdown tables for structured mappings
 - Provide a "Quick Start" section for complex agents
 
@@ -208,6 +198,6 @@ Before submitting a contribution:
 5. [ ] No platform-specific artifacts (XML tags, JSON schemas, tool arrays)
 6. [ ] Instructions use imperative mood throughout
 7. [ ] Examples use markdown code blocks, not custom markup
-8. [ ] File is under 2000 lines
+8. [ ] SKILL.md body is under 500 lines (or under 30,000 characters for agents)
 9. [ ] No secrets, absolute paths, or environment-specific values
 10. [ ] Contribution does not duplicate an existing one in the repo

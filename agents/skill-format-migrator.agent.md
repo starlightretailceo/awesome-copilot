@@ -1,12 +1,7 @@
 ---
 name: skill-format-migrator
-description: >
-  Converts AI agent and skill definitions from Claude Agent Skills (SKILL.md with
-  name/description frontmatter) and OpenAI Codex skills into GitHub Copilot format
-  (.agent.md for personas with tools, SKILL.md for reusable knowledge). Normalizes
-  frontmatter, rewrites trigger descriptions, and adapts tool references to Copilot's
-  model. Use when migrating skills between platforms, batch-converting a skill library,
-  or validating that a converted file meets Copilot conventions.
+description: 'Converts Claude and Codex agent/skill definitions into GitHub Copilot format.'
+model: 'Claude Sonnet 4.5'
 ---
 
 # Skill Format Migrator
