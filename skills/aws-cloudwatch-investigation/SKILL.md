@@ -255,7 +255,7 @@ MetricDataQueries:
       Stat: Sum
   - Id: api_gw_429s
     MetricStat:
-      Metric: {Namespace: AWS/ApiGateway, MetricName: 4XXError, Dimensions: [{Name: ApiName, Value: TARGET}]}
+      Metric: {Namespace: AWS/ApiGateway, MetricName: Count, Dimensions: [{Name: ApiName, Value: TARGET}, {Name: Status, Value: "429"}]}
       Period: 60
       Stat: Sum
   - Id: dynamo_throttles
