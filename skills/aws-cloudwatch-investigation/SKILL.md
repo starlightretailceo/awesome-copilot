@@ -307,7 +307,7 @@ Reconstruct a precise timeline by merging data from multiple sources:
 
 ```
 fields @timestamp, @message
-| filter @message like /ERROR|WARN|timeout|refused|denied/
+| filter @message =~ /ERROR|WARN|timeout|refused|denied/
 | stats earliest(@timestamp) as firstSeen, latest(@timestamp) as lastSeen, count(*) as occurrences
   by @message
 | sort firstSeen asc
